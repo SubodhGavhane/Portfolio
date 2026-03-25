@@ -1,8 +1,11 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #0f172a;
     color: white;
+
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #0ea5e9);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
 }
 
 header {
@@ -19,8 +22,17 @@ header {
 section {
     padding: 25px;
     margin: 20px;
-    background: #1e293b;
-    border-radius: 10px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+section:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
 }
 
 h2 {
