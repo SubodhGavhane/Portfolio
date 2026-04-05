@@ -18,6 +18,8 @@
   --muted:#7a7468;
 }
 
+html { scroll-behavior:smooth; }
+
 body {
   font-family:'Outfit',sans-serif;
   background:var(--paper);
@@ -43,7 +45,7 @@ nav a:hover { color:var(--gold); }
 
 /* HEADER */
 header {
-  min-height:70vh;
+  min-height:80vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -66,11 +68,13 @@ h1 em { color:var(--gold); }
   text-decoration:none;
   color:var(--ink);
   position:relative;
+  display:inline-block;
 }
 
 .contact a::after {
   content:"";
   position:absolute;
+  left:0;
   bottom:-3px;
   width:0%;
   height:1px;
@@ -85,6 +89,7 @@ h1 em { color:var(--gold); }
   padding:40px 20px;
   max-width:1100px;
   margin:auto;
+  scroll-margin-top:70px;
 }
 
 .section:first-of-type {
@@ -172,10 +177,10 @@ footer {
 <body>
 
 <nav>
-<a href="#">About</a>
-<a href="#">Experience</a>
-<a href="#">Skills</a>
-<a href="#">Projects</a>
+<a href="#about">About</a>
+<a href="#experience">Experience</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
 </nav>
 
 <header>
@@ -190,7 +195,7 @@ footer {
 </header>
 
 <!-- ABOUT -->
-<section class="section">
+<section id="about" class="section">
 <div class="title">About Me</div>
 <p>Self-motivated QA Engineer with experience in Manual Testing, API Testing, and Automation basics.</p>
 <br>
@@ -198,7 +203,7 @@ footer {
 </section>
 
 <!-- EXPERIENCE -->
-<section class="section">
+<section id="experience" class="section">
 <div class="title">Experience</div>
 
 <div class="exp-card">
@@ -220,7 +225,7 @@ footer {
 </section>
 
 <!-- SKILLS -->
-<section class="section">
+<section id="skills" class="section">
 <div class="title">Skills</div>
 <div class="skills">
 <div class="skill">Manual Testing</div>
@@ -232,7 +237,7 @@ footer {
 </section>
 
 <!-- PROJECTS -->
-<section class="section">
+<section id="projects" class="section">
 <div class="title">Projects</div>
 <div class="grid">
 <div class="card">
