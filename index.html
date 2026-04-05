@@ -2,500 +2,210 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<h1 class="title">Subodh Gavhane — QA Engineer</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subodh Gavhane — QA Engineer</title>
 
-<style>
-.title {
-    white-space: nowrap;
-}
-</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --ink:      #0c0c0f;
-  --paper:    #f5f2eb;
-  --paper2:   #ede9df;
-  --gold:     #b8975a;
-  --gold-lt:  #d4b47a;
-  --charcoal: #2a2a30;
-  --muted:    #7a7468;
-  --rule:     rgba(184,151,90,0.2);
-  --ff-serif: 'Cormorant Garamond', Georgia, serif;
-  --ff-sans:  'Outfit', sans-serif;
+  --ink:#0c0c0f;
+  --paper:#f5f2eb;
+  --paper2:#ede9df;
+  --gold:#b8975a;
+  --muted:#7a7468;
+  --rule:rgba(184,151,90,0.2);
+  --ff-serif:'Cormorant Garamond', serif;
+  --ff-sans:'Outfit', sans-serif;
 }
-
-html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--ff-sans);
   background: var(--paper);
   color: var(--ink);
-  overflow-x: hidden;
+  text-align: center;
 }
 
-/* ── progress bar ── */
-#progress {
-  position: fixed; top: 0; left: 0;
-  height: 2px; background: var(--gold);
-  z-index: 8000; width: 0%;
-  transition: width 0.1s linear;
-}
-
-/* ── header ── */
-header {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  position: relative;
-  overflow: hidden;
-}
-
-header::before {
-  content: 'QA';
-  position: absolute;
-  right: -2%; top: 50%;
-  transform: translateY(-52%);
-  font-family: var(--ff-serif);
-  font-size: clamp(180px, 22vw, 380px);
-  font-weight: 300;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(184,151,90,0.1);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-
+/* HEADER */
 .header-top {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 32px 48px;
-  border-bottom: 1px solid var(--rule);
+  gap: 10px;
+  padding: 30px;
 }
-.logo {
-  font-family: var(--ff-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--gold);
+
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
-.header-nav { display: flex; gap: 28px; }
+
 .header-nav a {
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
   text-decoration: none;
-  transition: color 0.2s;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
 }
-.header-nav a:hover { color: var(--gold); }
 
 .header-hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 48px;
-  position: relative; z-index: 1;
+  padding: 40px 20px;
 }
 
-.hero-eyebrow {
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px;
-  opacity: 0;
-  animation: fadeUp 1s 0.2s ease forwards;
-}
-.hero-eyebrow::before, .hero-eyebrow::after {
-  content: '';
-  display: block;
-  width: 28px; height: 1px;
-  background: var(--gold);
-}
-
+/* NAME FIX */
 h1 {
   font-family: var(--ff-serif);
-  font-size: clamp(3.5rem, 8vw, 8rem);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  opacity: 0;
-  animation: fadeUp 1.2s 0.35s ease forwards;
+  font-size: clamp(3rem, 8vw, 6rem);
+  white-space: nowrap;
 }
-h1 em { font-style: italic; color: var(--gold); }
+
+h1 em {
+  color: var(--gold);
+}
 
 .hero-sub {
-  margin-top: 28px;
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--muted);
-  max-width: 440px;
-  line-height: 1.75;
-  text-align: center;
-  opacity: 0;
-  animation: fadeUp 1s 0.5s ease forwards;
-}
-
-.header-bottom {
-  padding: 26px 48px;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  opacity: 0;
-  animation: fadeUp 1s 0.65s ease forwards;
-}
-.contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
-.contact-links a {
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-  display: flex; align-items: center; gap: 5px;
-}
-.contact-links a:hover { color: var(--gold); }
-.contact-links a::after { content: '↗'; font-size: 9px; }
-.avail-badge {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.7rem; font-weight: 400;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-top: 20px;
   color: var(--muted);
 }
-.avail-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
-/* ── main ── */
-main { background: var(--paper); color: var(--ink); }
-
+/* SECTION */
 .section {
-  padding: 90px 48px;
-  border-bottom: 1px solid rgba(184,151,90,0.15);
-  max-width: 1100px;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.85s ease, transform 0.85s ease;
-  text-align: center;
+  padding: 70px 20px;
+  max-width: 900px;
+  margin: auto;
 }
-.section.visible { opacity: 1; transform: translateY(0); }
 
 .section-label {
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 44px;
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-}
-.section-label::before {
-  content: '';
-  width: 48px; height: 1px;
-  background: var(--gold); opacity: 0.35;
-}
-.section-label::after {
-  content: '';
-  width: 48px; height: 1px;
-  background: var(--gold); opacity: 0.35;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* about */
-.about-text {
-  font-family: var(--ff-serif);
-  font-size: clamp(1.7rem, 3vw, 2.6rem);
-  font-weight: 300;
-  line-height: 1.45;
-  color: var(--ink);
-  max-width: 800px;
-  margin: 0 auto;
-}
-.about-text em { font-style: italic; color: var(--gold); }
-
-/* skills */
+/* SKILLS */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1px;
-  background: rgba(184,151,90,0.15);
-  border-radius: 4px;
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
 }
-.skill-item {
-  padding: 20px 18px;
-  background: var(--paper);
-  font-size: 0.92rem;
-  font-weight: 300;
-  color: var(--charcoal);
-  display: flex; align-items: center; gap: 10px;
-  transition: background 0.25s, color 0.25s;
-  cursor: default;
-}
-.skill-item::before {
-  content: '';
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--gold); opacity: 0.7; flex-shrink: 0;
-}
-.skill-item:hover { background: rgba(184,151,90,0.1); color: var(--gold); }
 
-/* experience */
-.exp-item {
+.skill-item {
+  padding: 12px;
+  border: 1px solid var(--rule);
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.project-card {
+  padding: 20px;
+  border: 1px solid var(--rule);
+}
+
+/* EXPERIENCE & EDUCATION */
+.exp-item, .edu-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* FOOTER */
+footer {
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 36px 0;
-  border-bottom: 1px solid rgba(184,151,90,0.15);
-}
-.exp-item:first-child { border-top: 1px solid rgba(184,151,90,0.15); }
-.exp-year { font-size: 0.78rem; font-weight: 300; color: var(--muted); letter-spacing: 0.06em; padding-top: 5px; }
-.exp-role { font-family: var(--ff-serif); font-size: 1.65rem; font-weight: 300; color: var(--ink); margin-bottom: 5px; }
-.exp-company { font-size: 0.82rem; font-weight: 400; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
-.exp-desc { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
-.exp-bullets { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
-.exp-bullets li {
-  font-size: 0.88rem; font-weight: 300; color: var(--muted);
-  padding-left: 14px; position: relative; line-height: 1.6;
-}
-.exp-bullets li::before {
-  content: ''; position: absolute; left: 0; top: 9px;
-  width: 4px; height: 1px; background: var(--gold); opacity: 0.6;
-}
-
-/* projects */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
-  background: rgba(184,151,90,0.15);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.project-card {
-  background: var(--paper);
-  padding: 38px 32px;
-  position: relative; overflow: hidden;
-  transition: background 0.3s;
-  text-align: center;
-}
-.project-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  transform: scaleX(0);
-  transition: transform 0.4s ease;
-}
-.project-card:hover { background: rgba(184,151,90,0.06); }
-.project-card:hover::after { transform: scaleX(1); }
-.proj-num {
-  font-family: var(--ff-serif); font-size: 2.8rem;
-  font-weight: 300; color: rgba(184,151,90,0.2);
-  line-height: 1; margin-bottom: 14px; font-style: italic;
-}
-.proj-name { font-family: var(--ff-serif); font-size: 1.5rem; font-weight: 300; color: var(--ink); margin-bottom: 8px; }
-.proj-tech { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
-.proj-desc { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
-
-/* education */
-.edu-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 36px 0;
-  border-bottom: 1px solid rgba(184,151,90,0.15);
-}
-.edu-item:first-child { border-top: 1px solid rgba(184,151,90,0.15); }
-
-/* footer */
-footer {
   background: var(--paper2);
-  border-top: 1px solid rgba(184,151,90,0.2);
-  padding: 40px 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-name { font-family: var(--ff-serif); font-size: 1rem; font-weight: 300; color: var(--muted); }
-.footer-copy { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 680px) {
-  .header-top, .header-hero, .header-bottom, .section { padding-left: 24px; padding-right: 24px; }
-  .header-nav { display: none; }
-  .exp-item, .edu-item { grid-template-columns: 1fr; gap: 6px; }
-  h1 { font-size: clamp(3rem, 13vw, 5rem); }
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
+
 <body>
 
-<div id="progress"></div>
-
 <header>
+
   <div class="header-top">
-    <div class="logo">SG — Portfolio</div>
+    <div>SG — Portfolio</div>
     <nav class="header-nav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
+      <a href="#">About</a>
+      <a href="#">Skills</a>
+      <a href="#">Experience</a>
+      <a href="#">Projects</a>
+      <a href="#">Education</a>
     </nav>
   </div>
 
   <div class="header-hero">
-    <div class="hero-eyebrow">QA Engineer</div>
-    <h1>Subodh<br><em>Gavhane</em></h1>
-    <p class="hero-sub">Manual Testing · Selenium · API Testing · Ensuring quality at every step of the software lifecycle.</p>
+    <div>QA Engineer</div>
+
+    <!-- ✅ FIXED NAME -->
+    <h1>Subodh <em>Gavhane</em></h1>
+
+    <p class="hero-sub">
+      Manual Testing · Selenium · API Testing · Ensuring quality at every step.
+    </p>
   </div>
 
-  <div class="header-bottom">
-    <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#2d5e584f4249454a4c5b454c43481f1a6d4a404c4441034e4240">Email</a>
-      <a href="https://github.com/subodhgavhane" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/subodh-gavhane-9484341a9" target="_blank">LinkedIn</a>
-    </div>
-    <div class="avail-badge">
-      <span class="avail-dot"></span>
-      Open to opportunities
-    </div>
-  </div>
 </header>
 
 <main>
 
-  <div class="section" id="about">
+  <div class="section">
     <div class="section-label">About</div>
-    <p class="about-text">
-      Self-motivated QA Engineer with hands-on experience in <em>Manual Testing, API Testing,</em> and Automation basics. Strong grasp of SDLC &amp; STLC — focused on delivering high-quality software that actually works.
+    <p>
+      Self-motivated QA Engineer with experience in Manual Testing, API Testing,
+      and Automation basics.
     </p>
   </div>
 
-  <div class="section" id="skills">
+  <div class="section">
     <div class="section-label">Skills</div>
     <div class="skills-grid">
       <div class="skill-item">Manual Testing</div>
-      <div class="skill-item">Selenium + Java</div>
+      <div class="skill-item">Selenium</div>
       <div class="skill-item">TestNG</div>
-      <div class="skill-item">Page Object Model</div>
-      <div class="skill-item">Data Driven Framework</div>
-      <div class="skill-item">API Testing (Postman)</div>
-      <div class="skill-item">Bug Tracking (MantisBT)</div>
-      <div class="skill-item">SQL Basics</div>
-      <div class="skill-item">SDLC / STLC</div>
-      <div class="skill-item">Regression Testing</div>
-      <div class="skill-item">Cross-browser Testing</div>
-      <div class="skill-item">Git / GitHub</div>
+      <div class="skill-item">API Testing</div>
+      <div class="skill-item">SQL</div>
     </div>
   </div>
 
-  <div class="section" id="experience">
+  <div class="section">
     <div class="section-label">Experience</div>
-    <div>
-      <div class="exp-item">
-        <div class="exp-year">June 2024 — Sep 2025</div>
-        <div>
-          <div class="exp-role">Junior Software Tester</div>
-          <div class="exp-company">Orion Tech Software Pvt. Ltd</div>
-          <div class="exp-desc">Project: Sevak Army — Web Application (Volunteer-NGO Platform)</div>
-          <ul class="exp-bullets">
-            <li>Performed end-to-end functional, integration, and system testing</li>
-            <li>Logged and tracked defects using MantisBT</li>
-            <li>Executed regression and usability testing across releases</li>
-            <li>Verified cross-browser compatibility across major browsers</li>
-          </ul>
-        </div>
-      </div>
+    <div class="exp-item">
+      <div>Junior Software Tester</div>
+      <div>Orion Tech Software Pvt. Ltd</div>
     </div>
   </div>
 
-  <div class="section" id="projects">
+  <div class="section">
     <div class="section-label">Projects</div>
     <div class="projects-grid">
-      <div class="project-card">
-        <div class="proj-num">01</div>
-        <div class="proj-name">Sevak Army Web App</div>
-        <div class="proj-tech">Manual · Postman · MantisBT</div>
-        <div class="proj-desc">End-to-end QA for a volunteer-NGO platform. Created test cases, executed scenarios, reported and tracked bugs through the full defect lifecycle.</div>
-      </div>
-      <div class="project-card">
-        <div class="proj-num">02</div>
-        <div class="proj-name">Selenium Automation</div>
-        <div class="proj-tech">Java · Selenium · TestNG</div>
-        <div class="proj-desc">Built automation test suites using Page Object Model and Data Driven Framework with TestNG for structured, maintainable test execution.</div>
-      </div>
-      <div class="project-card">
-        <div class="proj-num">03</div>
-        <div class="proj-name">API Test Suite</div>
-        <div class="proj-tech">Postman · REST APIs</div>
-        <div class="proj-desc">Designed and executed API test collections in Postman covering CRUD operations, authentication flows, and response validation.</div>
-      </div>
+      <div class="project-card">Sevak Army Web App</div>
+      <div class="project-card">Selenium Automation</div>
+      <div class="project-card">API Test Suite</div>
     </div>
   </div>
 
-  <div class="section" id="education">
+  <div class="section">
     <div class="section-label">Education</div>
-    <div>
-      <div class="edu-item">
-        <div class="exp-year">B.E.</div>
-        <div>
-          <div class="exp-role">Bachelor of Engineering</div>
-          <div class="exp-company">R.C. Patel Institute of Technology, Shirpur</div>
-        </div>
-      </div>
-      <div class="edu-item">
-        <div class="exp-year">Certification</div>
-        <div>
-          <div class="exp-role">Software Testing Course</div>
-          <div class="exp-company">QSpiders, Pune</div>
-        </div>
-      </div>
+    <div class="edu-item">
+      Bachelor of Engineering
     </div>
   </div>
 
 </main>
 
 <footer>
-  <div class="footer-name">Subodh Gavhane</div>
-  <div class="footer-copy">© 2026 — All rights reserved</div>
+  <div>Subodh Gavhane</div>
+  <div>© 2026</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const bar = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    bar.style.width = pct + '%';
-  });
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs
+</body>
+</html>
