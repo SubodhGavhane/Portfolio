@@ -8,30 +8,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg:#0c0c0f;
-  --text:#f5f2eb;
-  --gold:#b8975a;
-}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-.light {
-  --bg:#f5f2eb;
-  --text:#0c0c0f;
+:root {
+  --ink:#0c0c0f;
+  --paper:#f5f2eb;
+  --paper2:#ede9df;
+  --gold:#b8975a;
+  --muted:#7a7468;
 }
 
 body {
-  margin:0;
   font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  text-align:center;
-  transition:0.3s;
+  background:var(--paper);
+  color:var(--ink);
+}
+
+#progress {
+  position:fixed;
+  top:0; left:0;
+  height:2px;
+  width:0%;
+  background:var(--gold);
 }
 
 /* HEADER */
 header {
-  padding:80px 20px;
-  animation:fadeUp 1s ease;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
 h1 {
@@ -39,131 +47,272 @@ h1 {
   font-size:clamp(3rem,8vw,6rem);
   white-space:nowrap;
 }
-
 h1 em { color:var(--gold); }
 
-.hero-sub { margin-top:10px; opacity:0.7; }
+.hero-sub {
+  margin-top:15px;
+  color:var(--muted);
+}
 
-/* BUTTONS */
+/* CONTACT */
+.contact {
+  margin-top:25px;
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  justify-content:center;
+  font-size:0.95rem;
+}
+
+.contact a {
+  text-decoration:none;
+  color:var(--ink);
+  position:relative;
+}
+
+.contact a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-3px;
+  width:0%;
+  height:1px;
+  background:var(--gold);
+  transition:0.3s;
+}
+
+.contact a:hover::after {
+  width:100%;
+}
+
+/* BUTTON */
 .btn {
-  display:inline-block;
   margin-top:20px;
   padding:10px 20px;
   border:1px solid var(--gold);
   color:var(--gold);
   text-decoration:none;
-  transition:0.3s;
 }
 .btn:hover {
   background:var(--gold);
   color:#000;
 }
 
-/* TOGGLE */
-.toggle {
-  position:fixed;
-  top:20px;
-  right:20px;
-  cursor:pointer;
-  font-size:14px;
-}
-
 /* SECTIONS */
 .section {
-  padding:60px 20px;
-  animation:fadeUp 1s ease;
+  padding:70px 20px;
+  max-width:1100px;
+  margin:auto;
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.8s;
+}
+.section.visible {
+  opacity:1;
+  transform:translateY(0);
 }
 
 .title {
+  text-align:center;
   color:var(--gold);
-  margin-bottom:20px;
+  margin-bottom:30px;
+  font-size:1.2rem;
 }
 
-/* GRID */
-.grid {
+/* ABOUT */
+.section p {
+  text-align:center;
+  max-width:700px;
+  margin:auto;
+  line-height:1.6;
+}
+
+/* EXPERIENCE (MATCHED STYLE) */
+.exp-card {
+  border:1px solid #d6d1c7;
+  padding:25px;
+  max-width:800px;
+  margin:30px auto;
+  text-align:left;
+}
+
+.exp-header {
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.exp-header h3 {
+  font-weight:500;
+}
+
+.exp-date {
+  color:var(--gold);
+  font-size:0.9rem;
+}
+
+.company {
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.exp-card ul {
+  padding-left:18px;
+}
+
+.exp-card li {
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
+/* SKILLS */
+.skills {
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:10px;
+  gap:12px;
+}
+
+.skill {
+  border:1px solid #d6d1c7;
+  padding:10px 16px;
+  font-size:0.9rem;
+}
+
+/* PROJECTS */
+.grid {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
 }
 
 .card {
-  border:1px solid #333;
+  border:1px solid #d6d1c7;
   padding:20px;
   max-width:300px;
-  transition:0.3s;
-}
-.card:hover {
-  transform:translateY(-5px);
+  text-align:left;
 }
 
-/* ANIMATION */
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:20px;
+  background:var(--paper2);
+  font-size:0.85rem;
 }
 </style>
 </head>
 
 <body>
 
-<div class="toggle" onclick="toggleMode()">🌙 Toggle</div>
+<div id="progress"></div>
 
 <header>
   <h1>Subodh <em>Gavhane</em></h1>
-  <p class="hero-sub">QA Engineer | Manual | Selenium | API Testing</p>
+  <p class="hero-sub">QA Engineer | Manual Testing | Selenium | API Testing</p>
 
-  <!-- RESUME BUTTON -->
-  <a href="Subodh_Gavhane_QA.docx" download class="btn">Download Resume</a>
+  <a href="Subodh_Gavhane_QA.docx" class="btn">Download Resume</a>
+
+  <div class="contact">
+    <a href="mailto:subodhgavhane27@gmail.com">Email</a>
+    <a href="https://github.com/subodhgavhane" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/subodh-gavhane-9484341a9" target="_blank">LinkedIn</a>
+  </div>
 </header>
 
 <!-- ABOUT -->
-<div class="section">
-  <div class="title">ABOUT</div>
-  <p>QA Engineer with experience in Manual Testing, API Testing and Automation basics.</p>
-</div>
-
-<!-- SKILLS -->
-<div class="section">
-  <div class="title">SKILLS</div>
-  <div class="grid">
-    <div class="card">Manual Testing</div>
-    <div class="card">Selenium</div>
-    <div class="card">TestNG</div>
-    <div class="card">API Testing</div>
-    <div class="card">SQL</div>
-    <div class="card">Git</div>
-  </div>
-</div>
+<section class="section">
+  <div class="title">About Me</div>
+  <p>
+    Self-motivated QA Engineer with experience in Manual Testing, API Testing, and Automation basics.
+  </p>
+  <br>
+  <p>
+    Tested a platform aimed at connecting volunteers with NGOs. The platform provides a streamlined process
+    for NGOs to create, monitor, and manage volunteer opportunities, ensuring effective collaboration and engagement.
+  </p>
+</section>
 
 <!-- EXPERIENCE -->
-<div class="section">
-  <div class="title">EXPERIENCE</div>
-  <div class="card">
-    <h3>Junior Software Tester</h3>
-    <p>Orion Tech Software Pvt. Ltd</p>
-    <p>2024 — 2025</p>
+<section class="section">
+  <div class="title">Experience</div>
+
+  <div class="exp-card">
+    <div class="exp-header">
+      <h3>Junior Software Tester</h3>
+      <span class="exp-date">June 2024 – Sep 2025</span>
+    </div>
+
+    <p class="company">Orion Tech Software Pvt. Ltd  <strong> | </strong> Sevak Army Web Application</p>
+
+    <ul>
+      <li>Performed end-to-end testing ensuring functionality and usability</li>
+      <li>Executed functional, integration, and system testing</li>
+      <li>Logged and tracked defects using MantisBT</li>
+      <li>Performed regression and cross-browser testing</li>
+      <li>Collaborated with developers to resolve issues efficiently</li>
+    </ul>
   </div>
-</div>
+</section>
+
+<!-- SKILLS -->
+<section class="section">
+  <div class="title">Skills</div>
+  <div class="skills">
+    <div class="skill">Manual Testing</div>
+    <div class="skill">Selenium + Java</div>
+    <div class="skill">TestNG Framework</div>
+    <div class="skill">API Testing (Postman)</div>
+    <div class="skill">MantisBT</div>
+  </div>
+</section>
 
 <!-- PROJECTS -->
-<div class="section">
-  <div class="title">PROJECTS</div>
+<section class="section">
+  <div class="title">Projects</div>
   <div class="grid">
-    <div class="card">Sevak Army Web App</div>
-    <div class="card">Selenium Framework</div>
-    <div class="card">API Testing</div>
-  </div>
-</div>
+    <div class="card">
+        <h3>Sevak Army Platform</h3>
+      <p>Tested NGO-volunteer platform with full validation coverage.</p>
+    </div>
 
-<footer class="section">
+    <div class="card">
+      <h3>Selenium Framework</h3>
+      <p>Automation using TestNG, POM, and data-driven testing.</p>
+    </div>
+
+    <div class="card">
+      <h3>API Testing</h3>
+      <p>Validated REST APIs using Postman.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
   © 2026 Subodh Gavhane
 </footer>
 
 <script>
-function toggleMode(){
-  document.body.classList.toggle("light");
-}
+const bar = document.getElementById('progress');
+
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = pct + '%';
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+});
+
+document.querySelectorAll('.section').forEach(sec => {
+  obs.observe(sec);
+});
 </script>
 
 </body>
