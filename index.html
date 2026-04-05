@@ -1,85 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Subodh Gavhane | QA Tester</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subodh Gavhane — QA Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink:      #0c0c0f;
+  --paper:    #f5f2eb;
+  --paper2:   #ede9df;
+  --gold:     #b8975a;
+  --gold-lt:  #d4b47a;
+  --charcoal: #2a2a30;
+  --muted:    #7a7468;
+  --rule:     rgba(184,151,90,0.2);
+  --ff-serif: 'Cormorant Garamond', Georgia, serif;
+  --ff-sans:  'Outfit', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ff-sans);
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── progress bar ── */
+#progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; background: var(--gold);
+  z-index: 8000; width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ── header ── */
+header {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: 'QA';
+  position: absolute;
+  right: -2%; top: 50%;
+  transform: translateY(-52%);
+  font-family: var(--ff-serif);
+  font-size: clamp(180px, 22vw, 380px);
+  font-weight: 300;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(184,151,90,0.1);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 48px;
+  border-bottom: 1px solid var(--rule);
+}
+.logo {
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+.header-nav { display: flex; gap: 28px; }
+.header-nav a {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--gold); }
+
+.header-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 48px;
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s ease forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 36px; height: 1px;
+  background: var(--gold);
+}
+
+h1 {
+  font-family: var(--ff-serif);
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  opacity: 0;
+  animation: fadeUp 1.2s 0.35s ease forwards;
+}
+h1 em { font-style: italic; color: var(--gold); }
+
+.hero-sub {
+  margin-top: 28px;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 400px;
+  line-height: 1.75;
+  opacity: 0;
+  animation: fadeUp 1s 0.5s ease forwards;
+}
+
+.header-bottom {
+  padding: 26px 48px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 1s 0.65s ease forwards;
+}
+.contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.contact-links a {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.contact-links a:hover { color: var(--gold); }
+.contact-links a::after { content: '↗'; font-size: 9px; }
+.avail-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.avail-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+/* ── main ── */
+main { background: var(--ink); color: var(--paper); }
+
+.section {
+  padding: 90px 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  max-width: 1100px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.section-label {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 44px;
+  display: flex; align-items: center; gap: 14px;
+}
+.section-label::after {
+  content: '';
+  width: 48px; height: 1px;
+  background: var(--gold); opacity: 0.35;
+}
+
+/* about */
+.about-text {
+  font-family: var(--ff-serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--paper);
+  max-width: 800px;
+}
+.about-text em { font-style: italic; color: var(--gold-lt); }
+
+/* skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.skill-item {
+  padding: 20px 18px;
+  background: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(245,242,235,0.55);
+  display: flex; align-items: center; gap: 10px;
+  transition: background 0.25s, color 0.25s;
+  cursor: default;
+}
+.skill-item::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold); opacity: 0.5; flex-shrink: 0;
+}
+.skill-item:hover { background: rgba(184,151,90,0.07); color: var(--gold-lt); }
+
+/* experience */
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.exp-item:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+.exp-year { font-size: 0.73rem; font-weight: 300; color: var(--muted); letter-spacing: 0.06em; padding-top: 5px; }
+.exp-role { font-family: var(--ff-serif); font-size: 1.45rem; font-weight: 300; color: var(--paper); margin-bottom: 5px; }
+.exp-company { font-size: 0.75rem; font-weight: 400; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+.exp-desc { font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
+.exp-bullets { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.exp-bullets li {
+  font-size: 0.8rem; font-weight: 300; color: var(--muted);
+  padding-left: 14px; position: relative; line-height: 1.6;
+}
+.exp-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 4px; height: 1px; background: var(--gold); opacity: 0.6;
+}
+
+/* projects */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.project-card {
+  background: var(--ink);
+  padding: 38px 32px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.project-card:hover { background: rgba(184,151,90,0.05); }
+.project-card:hover::after { transform: scaleX(1); }
+.proj-num {
+  font-family: var(--ff-serif); font-size: 2.8rem;
+  font-weight: 300; color: rgba(184,151,90,0.12);
+  line-height: 1; margin-bottom: 14px; font-style: italic;
+}
+.proj-name { font-family: var(--ff-serif); font-size: 1.4rem; font-weight: 300; color: var(--paper); margin-bottom: 8px; }
+.proj-tech { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+.proj-desc { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+/* education */
+.edu-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.edu-item:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* footer */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-name { font-family: var(--ff-serif); font-size: 1rem; font-weight: 300; color: rgba(245,242,235,0.25); }
+.footer-copy { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 680px) {
+  .header-top, .header-hero, .header-bottom, .section { padding-left: 24px; padding-right: 24px; }
+  .header-nav { display: none; }
+  .exp-item, .edu-item { grid-template-columns: 1fr; gap: 6px; }
+  h1 { font-size: clamp(3rem, 13vw, 5rem); }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
 </head>
 <body>
 
+<div id="progress"></div>
+
 <header>
-    <h1>Subodh Gavhane</h1>
-    <p>QA Tester | Manual Testing | API Testing</p>
-    <div class="contact">
-        <p>📧 subodhgavhane27@gmail.com</p>
-        <p>📞 9970216519</p>
-        <p>
-            <a href="https://github.com/subodhgavhane" target="_blank">GitHub</a> |
-            <a href="https://linkedin.com/in/subodh-gavhane-9484341a9" target="_blank">LinkedIn</a>
-        </p>
+  <div class="header-top">
+    <div class="logo">SG — Portfolio</div>
+    <nav class="header-nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+    </nav>
+  </div>
+
+  <div class="header-hero">
+    <div class="hero-eyebrow">QA Engineer</div>
+    <h1>Subodh<br><em>Gavhane</em></h1>
+    <p class="hero-sub">Manual Testing · Selenium · API Testing · Ensuring quality at every step of the software lifecycle.</p>
+  </div>
+
+  <div class="header-bottom">
+    <div class="contact-links">
+      <a href="mailto:subodhgavhane27@gmail.com">Email</a>
+      <a href="https://github.com/subodhgavhane" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/subodh-gavhane-9484341a9" target="_blank">LinkedIn</a>
     </div>
+    <div class="avail-badge">
+      <span class="avail-dot"></span>
+      Open to opportunities
+    </div>
+  </div>
 </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        Self-motivated and passionate QA Engineer with hands-on experience in Manual Testing,
-        API Testing, and Automation basics. Strong understanding of SDLC & STLC with a focus
-        on delivering high-quality software.
+<main>
+
+  <div class="section" id="about">
+    <div class="section-label">About</div>
+    <p class="about-text">
+      Self-motivated QA Engineer with hands-on experience in <em>Manual Testing, API Testing,</em> and Automation basics. Strong grasp of SDLC &amp; STLC — focused on delivering high-quality software that actually works.
     </p>
-</section>
+  </div>
 
-<section>
-    <h2>Skills</h2>
-    <ul>
-        <li>Manual Testing</li>
-        <li>Automation Testing (Selenium + Java)</li>
-        <li>TestNG, Data Driven Framework, POM</li>
-        <li>API Testing (Postman)</li>
-        <li>Bug Tracking (MantisBT)</li>
-        <li>SQL Basics</li>
-    </ul>
-</section>
+  <div class="section" id="skills">
+    <div class="section-label">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-item">Manual Testing</div>
+      <div class="skill-item">Selenium + Java</div>
+      <div class="skill-item">TestNG</div>
+      <div class="skill-item">Page Object Model</div>
+      <div class="skill-item">Data Driven Framework</div>
+      <div class="skill-item">API Testing (Postman)</div>
+      <div class="skill-item">Bug Tracking (MantisBT)</div>
+      <div class="skill-item">SQL Basics</div>
+      <div class="skill-item">SDLC / STLC</div>
+      <div class="skill-item">Regression Testing</div>
+      <div class="skill-item">Cross-browser Testing</div>
+      <div class="skill-item">Git / GitHub</div>
+    </div>
+  </div>
 
-<section>
-    <h2>Experience</h2>
-    <h3>Junior Software Tester</h3>
-    <p>Orion Tech Software Pvt. Ltd (June 2024 – Sep 2025)</p>
+  <div class="section" id="experience">
+    <div class="section-label">Experience</div>
+    <div>
+      <div class="exp-item">
+        <div class="exp-year">June 2024 — Sep 2025</div>
+        <div>
+          <div class="exp-role">Junior Software Tester</div>
+          <div class="exp-company">Orion Tech Software Pvt. Ltd</div>
+          <div class="exp-desc">Project: Sevak Army — Web Application (Volunteer-NGO Platform)</div>
+          <ul class="exp-bullets">
+            <li>Performed end-to-end functional, integration, and system testing</li>
+            <li>Logged and tracked defects using MantisBT</li>
+            <li>Executed regression and usability testing across releases</li>
+            <li>Verified cross-browser compatibility across major browsers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <h4>Project: Sevak Army - Web Application</h4>
-    <ul>
-        <li>Performed end-to-end testing of a volunteer-NGO platform</li>
-        <li>Executed functional, integration, and system testing</li>
-        <li>Logged and tracked defects using MantisBT</li>
-        <li>Performed regression and usability testing</li>
-        <li>Verified cross-browser compatibility</li>
-    </ul>
-</section>
+  <div class="section" id="projects">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="proj-num">01</div>
+        <div class="proj-name">Sevak Army Web App</div>
+        <div class="proj-tech">Manual · Postman · MantisBT</div>
+        <div class="proj-desc">End-to-end QA for a volunteer-NGO platform. Created test cases, executed scenarios, reported and tracked bugs through the full defect lifecycle.</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-num">02</div>
+        <div class="proj-name">Selenium Automation</div>
+        <div class="proj-tech">Java · Selenium · TestNG</div>
+        <div class="proj-desc">Built automation test suites using Page Object Model and Data Driven Framework with TestNG for structured, maintainable test execution.</div>
+      </div>
+      <div class="project-card">
+        <div class="proj-num">03</div>
+        <div class="proj-name">API Test Suite</div>
+        <div class="proj-tech">Postman · REST APIs</div>
+        <div class="proj-desc">Designed and executed API test collections in Postman covering CRUD operations, authentication flows, and response validation.</div>
+      </div>
+    </div>
+  </div>
 
-<section>
-    <h2>Projects</h2>
-    <ul>
-        <li><strong>Sevak Army Web App Testing</strong> – End-to-end QA testing</li>
-        <li>Created test cases, executed scenarios, reported bugs</li>
-        <li>Performed API testing using Postman</li>
-    </ul>
-</section>
+  <div class="section" id="education">
+    <div class="section-label">Education</div>
+    <div>
+      <div class="edu-item">
+        <div class="exp-year">B.E.</div>
+        <div>
+          <div class="exp-role">Bachelor of Engineering</div>
+          <div class="exp-company">R.C. Patel Institute of Technology, Shirpur</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="exp-year">Certification</div>
+        <div>
+          <div class="exp-role">Software Testing Course</div>
+          <div class="exp-company">QSpiders, Pune</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<section>
-    <h2>Education</h2>
-    <p>Bachelor of Engineering – R.C. Patel Institute of Technology, Shirpur</p>
-    <p>Software Testing Course – QSpiders Pune</p>
-</section>
-
-<section>
-    <h2>Contact</h2>
-    <p>Email: subodhgavhane27@gmail.com</p>
-    <p>Phone: 9970216519</p>
-</section>
+</main>
 
 <footer>
-    <p>© 2026 Subodh Gavhane</p>
+  <div class="footer-name">Subodh Gavhane</div>
+  <div class="footer-copy">© 2026 — All rights reserved</div>
 </footer>
+
+<script>
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+</script>
 
 </body>
 </html>
